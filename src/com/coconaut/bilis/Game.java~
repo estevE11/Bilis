@@ -1,0 +1,300 @@
+package com.coconaut.bilis;
+
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.util.LinkedList;
+import java.util.Random;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Controllers;
+
+import com.coconaut.bilis.entity.mob.Player;
+import com.coconaut.bilis.gfx.Camera;
+import com.coconaut.bilis.gfx.Screen;
+import com.coconaut.bilis.input.KeyboardInput;
+import com.coconaut.bilis.level.Level;
+import com.coconaut.bilis.level.Room;
+import com.coconaut.bilis.level.tile.Tile;
+import com.coconaut.bilis.sound.Sound;
+import com.coconaut.bilis.state.GameState;
+import com.coconaut.bilis.state.InitState;
+import com.coconaut.bilis.state.MainMenuState;
+import com.coconaut.bilis.state.State;
+
+import net.java.games.input.Controller;
+import net.java.games.input.ControllerEnvironment;
+
+public class Game extends Canvas implements Runnable {	
+	private static final long serialVersionUID = 1L;
+
+	private Random r = new Random();
+	
+	public static int WIDTH = 160*2, HEIGHT = 120*2, SCALE = 3;
+	private final int tickRate = 60;
+	private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	private static double swidth = screenSize.getWidth();
+	private static double sheight = screenSize.getHeight();
+	public static final String version = "v0.0.6";
+	public static final boolean resizeable = false;
+	public static final int onClose = JFrame.DO_NOTHING_ON_CLOSE;
+	public static final Component locationRelative = null;
+	public static boolean isFullscreen;
+	public JFrame frame;
+	
+	public static int KEY_JUMP = KeyEvent.VK_SPACE;
+	public static int KEY_MOVE_LEFT = KeyEvent.VK_A;
+	public static int KEY_MOVE_RIGHT = KeyEvent.VK_D;
+	public static int KEY_SHOOT_LEFT = KeyEvent.VK_LEFT;
+	public static int KEY_SHOOT_RIGHT = KeyEvent.VK_RIGHT;
+	public static int KEY_START = KeyEvent.VK_ESCAPE;
+	
+	public static boolean hasJoystick = false;
+	public static Controller gamepad;
+	
+	private BufferedImage canvas;
+	private int fps = 0, tps = 0, ffps = 0, ftps = 0;
+	private static LinkedList<Integer> frames = new LinkedList<Integer>();
+	
+	private Thread thread;
+	public static Camera camera;
+	private KeyboardInput kb;
+	private Screen screen;
+		
+	private State currentState;
+	
+	public void start() {
+		Resources.i.load();
+		try {
+			Controllers.create();
+			if(!Controllers.isCreated()) Log.error("Error loading controllers pluged in!"); 
+		} catch (LWJGLException e) {
+			Log.error(e.getMessage());
+		}
+		Controllers.poll();
+		
+		this.thread = new Thread(this, "Bilis Main Thread");
+		this.thread.start();
+	}
+	
+	public void init() {
+		this.canvas = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+						
+		this.currentState = new InitState(this);
+		this.kb = new KeyboardInput();
+		
+		this.addKeyListener(this.kb);
+		this.kb.setState(this.currentState);
+		Game.camera = new Camera();
+		this.screen = new Screen(Game.camera);
+		
+		Controller[] ca = ControllerEnvironment.getDefaultEnvironment().getControllers();
+		
+		for(Controller c : ca) {
+			if(c.getType() == Controller.Type.GAMEPAD) {
+				gamepad = c;
+				this.hasJoystick = true;
+			}
+		}
+		
+		if(hasJoystick) Log.info("Game pad connected (" + gamepad.getName() + ")");
+		String settings = FileUtil.readFile("game/settings.bgf");
+		Sound.volume = Integer.parseInt(settings.split("-")[0]);
+		int f = Integer.parseInt(settings.split("-")[1]);
+		Game.isFullscreen = f == 0 ? false : true;
+		this.setFullscreen(Game.isFullscreen);
+	}
+ 	
+	public void run() {
+		requestFocus();
+		Log.info("tickRate = " + tickRate);
+		long lastTime = System.nanoTime();
+		double unprocessed = 0;
+		double nsPerTick = 1000000000.0 / 60;
+		long lastTimer1 = System.currentTimeMillis();
+
+		init();
+
+		while (true) {
+			long now = System.nanoTime();
+			unprocessed += (now - lastTime) / nsPerTick;
+			lastTime = now;
+			boolean shouldRender = true;
+			while (unprocessed >= 1) {
+				tps++;
+				update();
+				unprocessed -= 1;
+				shouldRender = true;
+			}
+
+
+			if (shouldRender) {
+				fps++;
+				render();
+			}
+
+			if (System.currentTimeMillis() - lastTimer1 > 1000) {
+				lastTimer1 += 1000;
+				Log.info(tps + " ticks, " + fps + " fps");
+				ffps = fps;
+				ftps = tps;
+				frames.add(fps);
+				fps = 0;
+				tps = 0;
+			}
+		}
+	}
+	
+	public void update() {
+		if(this.hasFocus() || true) {
+			if(hasJoystick) {
+				gamepad.poll();
+			}
+			
+			this.currentState.update();
+		}
+	}
+	
+	public void render() {
+		
+		screen.update(canvas);
+		screen.clear();
+		
+		this.currentState.render(screen);
+//		if(Game.hasJoystick) {
+//			for(int i = 0; i < Game.gamepad.getComponents().length; i++) {
+//				double pollData = Game.gamepad.getComponents()[i].getPollData();
+//				String name = Game.gamepad.getComponents()[i].getName();
+//				screen.renderText(name + ", " + pollData, 1, 10+(12*i), 10, true);
+//			}
+//		}
+		
+		screen.end();
+		
+		// EXTRA STUFF (do not touch this)
+		Graphics gg = this.getGraphics();
+		if(isFullscreen) {
+			int w = (int)(WIDTH * (sheight/HEIGHT));
+			gg.fillRect(0, 0, (int)(swidth/2 - w/2), (int)sheight);
+			gg.fillRect((int)(swidth/2 - w/2) + w, 0, (int)(swidth/2 - w/2), (int)sheight);
+			gg.drawImage(this.canvas, (int)(swidth/2 - w/2), 0, w, (int)sheight, null);
+		} else {
+			gg.drawImage(this.canvas, 0, 0, WIDTH*SCALE, HEIGHT*SCALE, null);
+		}
+		gg.dispose();
+	}
+	
+	public void setState(State state) {
+		this.currentState = state;
+		this.kb.setState(this.currentState);
+		Log.info("State=" + state);
+	}
+	
+	public static int calculateAvgFrames() {	
+		int sum = 0;
+		int avg = 0;
+		
+		for(int f : frames) {
+			sum += f;
+		}
+		
+		avg = sum/frames.size();
+		
+		return avg;
+	}
+	
+	public static Camera getCamera() {
+		return camera;
+	}
+	
+	public void setFullscreen(boolean c) {
+		this.isFullscreen = c;
+		
+		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice[] devices = env.getScreenDevices();
+		GraphicsDevice device = devices[0];
+        
+		frame.remove(this);
+		frame.dispose();
+		if(!frame.isDisplayable())frame.setUndecorated(isFullscreen);
+		frame.setLocationRelativeTo(locationRelative);
+		frame.add(this);
+		if(isFullscreen) device.setFullScreenWindow(this.frame);
+		else device.setFullScreenWindow(null);
+		frame.setVisible(true);
+		Log.info("Fullscreen: " + isFullscreen);
+	}
+	
+	public static void main(String args[]) {
+//		System.setProperty("java.library.path", "R:/git/Bilis/lib");
+//		System.loadLibrary("jinput-dx8_64");
+		
+		Game game = new Game();
+		game.frame = new JFrame("Bilis");
+
+		if(isFullscreen) {
+			game.frame.setPreferredSize(new Dimension((int)swidth, (int)sheight));
+			game.frame.setMaximumSize(new Dimension((int)swidth, (int)sheight));
+			game.frame.setMinimumSize(new Dimension((int)swidth, (int)sheight));
+		} else {
+			game.frame.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
+			game.frame.setMaximumSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
+			game.frame.setMinimumSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
+		}
+
+		Image icon = Toolkit.getDefaultToolkit().getImage("resources/gfx/icon.png");
+		
+		game.frame.setDefaultCloseOperation(onClose);
+		game.frame.setResizable(resizeable);
+		game.frame.setIconImage(icon);
+		game.setFullscreen(isFullscreen);
+		game.frame.setLocationRelativeTo(locationRelative);
+		game.frame.add(game);
+		game.frame.setVisible(true);
+		
+		game.frame.addWindowListener(new java.awt.event.WindowAdapter() {
+		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		    	Log.shutDown(1);
+		    }
+		});
+				
+		String os = System.getProperty("os.name");		
+		Log.info("OS: " + os + " v" + System.getProperty("os.version"));
+		Log.info("OS Arch: " + System.getProperty("os.arch"));
+		Log.info("Java version: " +  System.getProperty("java.version"));
+		Log.info("Java vendor: " +  System.getProperty("java.vendor"));
+		if(os.equals("Windows 10")) {
+			setProperty("sun.java2d.d3d", "true");
+			setProperty("sun.java2d.ddforcevram", "true");
+		} else {
+			setProperty("sun.java2d.opengl", "true");
+		}
+		
+		Log.info("Viewport: " + WIDTH*SCALE + "x" + HEIGHT*SCALE);
+		Log.info("Render: " + WIDTH + "x" + HEIGHT);
+		Log.info("Default close operation: " + onClose);
+		Log.info("Resizeable: " + resizeable);
+		Log.info("Location relative to: " + locationRelative);
+		Log.info("Bilis " + version);
+		
+		game.start();
+	}
+	
+	public static void setProperty(String a, String b) {
+		System.setProperty(a, b);
+		Log.info(a + "=" + b);
+	}
+}

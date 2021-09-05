@@ -1,0 +1,31 @@
+{
+    "name": "Català",
+    "leng": "cat",
+
+    "btn_play": "Jugar",
+    "btn_config": "Configuració"
+    "btn_exit": "Sortida",
+
+    "btn_volume": "Volum",
+    "btn_fullscreen": "Pantalla Completa",
+    "btn_controls": "Controls",
+    "btn_back": "Enderrere",
+
+    "btn_move_left": "Moure esquerra",
+    "btn_move_right": "Moure dreta",
+    "btn_shoot_left": "Disparar esquerra",
+    "btn_shoot_right": "Disparar dreta",
+    "btn_jump": "Saltar",
+
+    "btn_resume": "RESUME",
+
+    "info_jump": "Saltar",
+    "info_move": "Moure",
+    "info_shoot_left": "Disparar esquerra",
+    "info_shoot_right": "Disparar dreta",
+
+    "btn_audio": "Audio",
+
+    "btn_main_menu": "Menu principal",
+    "btn_exit_game": "Sortir del joc"
+}

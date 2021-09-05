@@ -1,0 +1,31 @@
+{
+    "name": "Español",
+    "leng": "es",
+
+    "btn_play": "Jugar",
+    "btn_config": "Ajustes"
+    "btn_exit": "Salir",
+
+    "btn_volume": "Volumen",
+    "btn_fullscreen": "Pantalla Completa",
+    "btn_controls": "Controles",
+    "btn_back": "Detras",
+
+    "btn_move_left": "Mover izquierda",
+    "btn_move_right": "Mover derecha",
+    "btn_shoot_left": "Disparar izquierda",
+    "btn_shoot_right": "Disparar derecha",
+    "btn_jump": "Jump",
+
+    "btn_resume": "RESUME",
+
+    "info_jump": "Saltar",
+    "info_move": "Mover",
+    "info_shoot_left": "Disparar izquierda",
+    "info_shoot_right": "Disparar derecha",
+
+    "btn_audio": "Audio",
+
+    "btn_main_menu": "Menu principal",
+    "btn_exit_game": "Salir del juego"
+}

@@ -1,0 +1,117 @@
+[INFO] - Bilis v0.0.10 release
+
+[INFO] - Fullscreen: false
+[INFO] - OS: Windows 10 v10.0
+[INFO] - OS Arch: amd64
+[INFO] - Java version: 1.8.0_121
+[INFO] - Java vendor: Oracle Corporation
+[INFO] - sun.java2d.d3d=true
+[INFO] - sun.java2d.ddforcevram=true
+[INFO] - Viewport: 960x720
+[INFO] - Render: 320x240
+[INFO] - Default close operation: 0
+[INFO] - Resizeable: false
+[INFO] - Location relative to: null
+[INFO] - Loading sprites...
+[INFO] - Attempting to load /gfx/mainmenu/maintitle.png
+[INFO] - /gfx/mainmenu/maintitle.png successfuly loaded
+[INFO] - Attempting to load /gfx/other/controllerBtns.png
+[INFO] - /gfx/other/controllerBtns.png successfuly loaded
+[INFO] - Attempting to load /gfx/pat_logo.png
+[INFO] - /gfx/pat_logo.png successfuly loaded
+[INFO] - Attempting to load /gfx/pausemenu/pausemenu.png
+[INFO] - /gfx/pausemenu/pausemenu.png successfuly loaded
+[INFO] - Attempting to load /gfx/pausemenu/pausemenu_back.png
+[INFO] - /gfx/pausemenu/pausemenu_back.png successfuly loaded
+[INFO] - Attempting to load /gfx/player/player_idle.png
+[INFO] - /gfx/player/player_idle.png successfuly loaded
+[INFO] - Attempting to load /gfx/player/player_run.png
+[INFO] - /gfx/player/player_run.png successfuly loaded
+[INFO] - Attempting to load /gfx/player/player_jumping.png
+[INFO] - /gfx/player/player_jumping.png successfuly loaded
+[INFO] - Attempting to load /gfx/player/player_jumping_side.png
+[INFO] - /gfx/player/player_jumping_side.png successfuly loaded
+[INFO] - Attempting to load /gfx/player/player_falling.png
+[INFO] - /gfx/player/player_falling.png successfuly loaded
+[INFO] - Attempting to load /gfx/player/player_falling_side.png
+[INFO] - /gfx/player/player_falling_side.png successfuly loaded
+[INFO] - Attempting to load /gfx/player/player_laser.png
+[INFO] - /gfx/player/player_laser.png successfuly loaded
+[INFO] - Attempting to load /gfx/player/player_slimeball.png
+[INFO] - /gfx/player/player_slimeball.png successfuly loaded
+[INFO] - Attempting to load /gfx/projectile/spr_bonemerang.png
+[INFO] - /gfx/projectile/spr_bonemerang.png successfuly loaded
+[INFO] - Attempting to load /gfx/enemy/spr_hotball.png
+[INFO] - /gfx/enemy/spr_hotball.png successfuly loaded
+[INFO] - Attempting to load /gfx/enemy/spr_polt.png
+[INFO] - /gfx/enemy/spr_polt.png successfuly loaded
+[INFO] - Attempting to load /gfx/entity/spr_chest.png
+[INFO] - /gfx/entity/spr_chest.png successfuly loaded
+[INFO] - Attempting to load /gfx/enemy/spr_skull.png
+[INFO] - /gfx/enemy/spr_skull.png successfuly loaded
+[INFO] - Attempting to load /gfx/boss/spr_boss_hotball.png
+[INFO] - /gfx/boss/spr_boss_hotball.png successfuly loaded
+[INFO] - Attempting to load /gfx/items/spr_spectral_balls.png
+[INFO] - /gfx/items/spr_spectral_balls.png successfuly loaded
+[INFO] - Attempting to load /gfx/items/spr_jump_boost.png
+[INFO] - /gfx/items/spr_jump_boost.png successfuly loaded
+[INFO] - Attempting to load /gfx/items/spr_speed_boost.png
+[INFO] - /gfx/items/spr_speed_boost.png successfuly loaded
+[INFO] - Attempting to load /gfx/items/spr_balls_up.png
+[INFO] - /gfx/items/spr_balls_up.png successfuly loaded
+[INFO] - Attempting to load /gfx/items/spr_power_rock.png
+[INFO] - /gfx/items/spr_power_rock.png successfuly loaded
+[INFO] - Attempting to load /gfx/tiles/tile_rock.png
+[INFO] - /gfx/tiles/tile_rock.png successfuly loaded
+[INFO] - Attempting to load /gfx/tiles/tile_barrier.png
+[INFO] - /gfx/tiles/tile_barrier.png successfuly loaded
+[INFO] - Attempting to load /gfx/notification/notification.png
+[INFO] - /gfx/notification/notification.png successfuly loaded
+[INFO] - tickRate = 60
+[INFO] - Attempting to load resources/sfx/player_jump.wav
+[INFO] - resources/sfx/player_jump.wav successfuly loaded
+[INFO] - Attempting to load resources/sfx/player_shoot.wav
+[INFO] - resources/sfx/player_shoot.wav successfuly loaded
+[INFO] - Attempting to load resources/sfx/menu_changed.wav
+[INFO] - resources/sfx/menu_changed.wav successfuly loaded
+[INFO] - Attempting to load resources/sfx/player_hurt.wav
+[INFO] - resources/sfx/player_hurt.wav successfuly loaded
+[INFO] - Attempting to load resources/sfx/enemy_hurt.wav
+[INFO] - resources/sfx/enemy_hurt.wav successfuly loaded
+[INFO] - Attempting to load resources/sfx/pickup_item.wav
+[INFO] - resources/sfx/pickup_item.wav successfuly loaded
+[INFO] - Rooms loaded
+[INFO] - Game pad connected (Controller (Xbox One For Windows))
+[INFO] - Fullscreen: false
+[INFO] - 59 ticks, 218 fps
+[INFO] - State=com.coconaut.bilis.state.MainMenuState@2a8ac436
+[INFO] - 60 ticks, 275 fps
+[INFO] - 60 ticks, 289 fps
+[INFO] - State=com.coconaut.bilis.state.GameState@5faef79d
+[INFO] - 60 ticks, 249 fps
+[INFO] - 60 ticks, 213 fps
+[INFO] - 60 ticks, 274 fps
+[INFO] - 60 ticks, 255 fps
+[INFO] - 60 ticks, 262 fps
+[INFO] - 60 ticks, 271 fps
+[INFO] - 60 ticks, 281 fps
+[INFO] - 60 ticks, 277 fps
+[INFO] - 60 ticks, 272 fps
+[INFO] - 60 ticks, 281 fps
+[INFO] - 60 ticks, 285 fps
+[INFO] - 60 ticks, 269 fps
+[INFO] - 60 ticks, 269 fps
+[INFO] - 60 ticks, 170 fps
+[INFO] - 60 ticks, 267 fps
+[INFO] - 60 ticks, 213 fps
+[INFO] - 60 ticks, 186 fps
+[INFO] - 60 ticks, 257 fps
+[INFO] - 60 ticks, 236 fps
+[INFO] - 60 ticks, 204 fps
+[INFO] - 60 ticks, 186 fps
+[INFO] - 60 ticks, 248 fps
+[INFO] - 60 ticks, 280 fps
+[INFO] - 60 ticks, 276 fps
+[INFO] - 60 ticks, 288 fps
+[INFO] - Average FPS: 251
+[INFO] - Closing.. (1)

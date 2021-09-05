@@ -1,0 +1,31 @@
+{
+    "name": "English",
+    "leng": "en",
+
+    "btn_play": "Play",
+    "btn_config": "Settings"
+    "btn_exit": "Exit",
+
+    "btn_volume": "Volume",
+    "btn_fullscreen": "Fullscreen",
+    "btn_controls": "Controls",
+    "btn_back": "Back",
+
+    "btn_move_left": "Move left",
+    "btn_move_right": "Move right",
+    "btn_shoot_left": "Shoot left",
+    "btn_shoot_right": "Shoot right",
+    "btn_jump": "Jump",
+
+    "btn_resume": "RESUME",
+
+    "info_jump": "Jump",
+    "info_move": "Move",
+    "info_shoot_left": "Shoot left",
+    "info_shoot_right": "Shoot right",
+
+    "btn_audio": "Audio",
+
+    "btn_main_menu": "Main Menu",
+    "btn_exit_game": "Exit Game"
+}

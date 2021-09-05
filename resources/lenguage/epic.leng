@@ -1,0 +1,31 @@
+{
+    "name": "Epic",
+    "leng": "epic",
+
+    "btn_play": "Star of sth",
+    "btn_config": "The change up"
+    "btn_exit": "Bye!",
+
+    "btn_volume": "Voice",
+    "btn_fullscreen": "Bigger than ever",
+    "btn_controls": "Mind controls",
+    "btn_back": "To the past",
+
+    "btn_move_left": "Walk left",
+    "btn_move_right": "Walk right",
+    "btn_shoot_left": "Water left",
+    "btn_shoot_right": "Water right",
+    "btn_jump": "Elevate",
+
+    "btn_resume": "Quit this s***",
+
+    "info_jump": "Elevate",
+    "info_move": "Walk",
+    "info_shoot_left": "Water left",
+    "info_shoot_right": "Water right",
+
+    "btn_audio": "Hear",
+
+    "btn_main_menu": "To the past (a lot)",
+    "btn_exit_game": "Get me out of here"
+}

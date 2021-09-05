@@ -1,0 +1,32 @@
+  _______ ____  _____   ____  
+ |__   __/ __ \|  __ \ / __ \ 
+    | | | |  | | |  | | |  | |
+    | | | |  | | |  | | |  | |
+    | | | |__| | |__| | |__| |
+    |_|  \____/|_____/ \____/
+
+
+- Roger "Puto Amo" Esteve:
+[x] - Turn level into individual rooms.
+[ ] - Implement background music.
+[ ] - AI for A.N.T.
+[ ] - Death screen.
+[ ] - Design death screen.
+[x] - Next level mechanics.
+[ ] - (Bug) Once on the second level, in the repeated rooms enemies die.
+[x] - (Bug) Laser sometimes dies just after throwing it.
+[x] - (Bug) When laser is shooted to the left it's rendered to right.
+[x] - (Bug) When laser is shooted to the left it's posicioned wrong.
+[x] - Item power rock
+[x] - (Bug) Normal jumping.
+[x] - (Bug) Warp level:unknown -> level:preboss not accesble.
+[x] - Graphical notifications when a item is picked.
+[x] - (Bug) Laser crashes...
+
+- Mario "The Lazy" Aladabó:
+[ ] - Background music: Main menu.
+[ ] - Background music: In game (arround 5).
+[ ] - Background music: Death.
+[ ] - Background music: Boss fight.
+[ ] - Design for DI-tro.
+[ ] - Design death screen.
